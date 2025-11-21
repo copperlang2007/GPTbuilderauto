@@ -1,7 +1,6 @@
 """
 Tests for Maintenance Monitor
 """
-import pytest
 import tempfile
 import shutil
 from pathlib import Path
@@ -69,7 +68,7 @@ class TestMaintenanceMonitor:
         
         result = self.monitor.health_check(str(deployment_path))
         
-        assert result['syntax_valid'] == False
+        assert result['syntax_valid'] is False
         
     def test_analyze_logs_missing_file(self):
         """Test log analysis with missing file"""

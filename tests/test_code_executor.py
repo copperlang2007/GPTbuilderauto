@@ -1,9 +1,6 @@
 """
 Tests for Code Executor
 """
-import pytest
-import tempfile
-from pathlib import Path
 from gptbuilderauto.executor.code_executor import CodeExecutor
 
 
@@ -14,7 +11,7 @@ class TestCodeExecutor:
         """Test initialization"""
         executor = CodeExecutor(timeout=60, use_docker=False)
         assert executor.timeout == 60
-        assert executor.use_docker == False
+        assert executor.use_docker is False
         
     def test_execute_python_simple(self):
         """Test simple Python execution"""
@@ -23,7 +20,7 @@ class TestCodeExecutor:
         
         result = executor.execute_python(code)
         
-        assert result['success'] == True
+        assert result['success'] is True
         assert "Hello, World!" in result['stdout']
         assert result['return_code'] == 0
         
@@ -34,7 +31,7 @@ class TestCodeExecutor:
         
         result = executor.execute_python(code)
         
-        assert result['success'] == False
+        assert result['success'] is False
         assert result['return_code'] != 0
         assert 'ValueError' in result['stderr'] or 'Test error' in result['stderr']
         
@@ -45,7 +42,7 @@ class TestCodeExecutor:
         
         result = executor.execute_python(code)
         
-        assert result['success'] == False
+        assert result['success'] is False
         assert 'timeout' in result['stderr'].lower()
         
     def test_get_extension(self):
