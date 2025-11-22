@@ -1,7 +1,6 @@
 """
 Tests for Deployer
 """
-import pytest
 import tempfile
 import shutil
 from pathlib import Path
@@ -32,7 +31,7 @@ class TestDeployer:
         code = "print('Hello, World!')"
         result = self.deployer.deploy_code(code, "test_app", "python")
         
-        assert result['success'] == True
+        assert result['success'] is True
         assert 'test_app' in result['deployment_name']
         assert Path(result['deployment_path']).exists()
         assert Path(result['code_file']).exists()
@@ -41,8 +40,8 @@ class TestDeployer:
         """Test deployment creates necessary files"""
         code = "console.log('Hello');"
         result = self.deployer.deploy_code(
-            code, 
-            "js_app", 
+            code,
+            "js_app",
             "javascript",
             metadata={"author": "test"}
         )
@@ -72,7 +71,7 @@ class TestDeployer:
         
         # Delete deployment
         success = self.deployer.delete_deployment(deployment_name)
-        assert success == True
+        assert success is True
         
         # Verify it's gone
         deployments = self.deployer.list_deployments()
@@ -81,7 +80,7 @@ class TestDeployer:
     def test_delete_nonexistent_deployment(self):
         """Test deleting non-existent deployment"""
         success = self.deployer.delete_deployment("nonexistent")
-        assert success == False
+        assert success is False
         
     def test_get_extension(self):
         """Test file extension mapping"""
